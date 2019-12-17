@@ -1,1 +1,10 @@
 *~
+*.bak
+*.cmp
+*.ppf
+db/
+incremental_db/
+greybox_tmp/
+output_files/
+*.txt
+*.qws
