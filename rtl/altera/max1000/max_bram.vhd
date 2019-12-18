@@ -45,7 +45,12 @@ entity max_bram is
         C_bram_size: integer := 32;
 
         -- Debugging
-        C_debug: boolean := false
+        C_debug: boolean := false;
+
+        -- SoC configuration
+        C_simple_in: integer  := 20;
+        C_simple_out: integer :=  8;
+        C_gpio: integer       := 18
     );
     port (
         clk_12m:   in std_logic;
@@ -76,21 +81,24 @@ begin
         C_clk_freq => C_clk_freq,
         C_arch => C_arch,
         C_bram_size => C_bram_size,
-        C_debug => C_debug
+        C_debug => C_debug,
+        C_simple_in => C_simple_in,
+        C_simple_out => C_simple_out,
+        C_gpio => C_gpio
     )
     port map (
         clk => clk,
         sio_txd(0) => uart_tx,
         sio_rxd(0) => uart_rx,
         sio_break(0) => open,
-        gpio(31 downto 18) => open,
+--        gpio(31 downto 18) => open,
         gpio(17 downto 0) => gpio,
         spi_miso => "",
         simple_out(7 downto 0) => led,
-        simple_out(31 downto 8) => open,
+--        simple_out(31 downto 8) => open,
         simple_in(15 downto 0) => btns,
-        simple_in(19 downto 16) => sw,
-        simple_in(31 downto 20) => open
+        simple_in(19 downto 16) => sw
+--        simple_in(31 downto 20) => open
     );
 
     btns <= x"000" & "000" & not user_btn;
